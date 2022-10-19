@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Presentacion_UI": {
+      "commandName": "Project"
+    },
+    "Perfil 1": {
+      "commandName": "Executable"
+    },
+    "Perfil 2": {
+      "commandName": "Project"
+    }
+  }
+}
