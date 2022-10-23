@@ -2,6 +2,7 @@
 using BE;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -13,12 +14,15 @@ namespace Mapper
     public class UsuarioMPP : IGestor<UsuarioBE>
     {
         private Acceso AccDatos;
+        private Hashtable HT;
+
         public bool Existe_Usuario(UsuarioBE UsuarioBe)
-        {  //instancio un objeto de la clase datos para operar con la BD
+        {  
             AccDatos = new Acceso();
-            string Consulta = "SELECT U.username FROM Usuario U WHERE U.password = '" + UsuarioBe.Password + "' AND U.username = '" + UsuarioBe.Username + "'";
-            DataTable Tabla = AccDatos.Leer(Consulta);
-            return Tabla.Rows.Count > 0;
+            HT = new Hashtable();
+            HT.Add("@nombreUsuario", UsuarioBe.Username);
+            HT.Add("@contrasenia", UsuarioBe.Password);
+            return AccDatos.LeerScalar("ExisteUsuario", HT);
         }
         public bool Baja(UsuarioBE Objeto)
         {

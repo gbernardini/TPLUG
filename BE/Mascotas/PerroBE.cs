@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,9 +36,19 @@ namespace BE.Mascotas
             return "Perro" + " - " + Nombre;
         }
 
-        public override string ToQuery()
+        public override Hashtable ObtenerHTAlta()
         {
-            return "Insert into Mascota (nombre, energia, felicidad, tieneColaLarga, tamanio, clase) values('" + Nombre + "', '" + Energia + "', '" + Felicidad + "', '" + TieneColaLarga + "', '" + Tamanio.ToString() + "', '1') ";
+            Hashtable HT = new Hashtable();
+            HT.Add("@nombre", Nombre);
+            HT.Add("@energia", Energia);
+            HT.Add("@felicidad", Felicidad);
+            HT.Add("@tieneColaLarga", TieneColaLarga);
+            HT.Add("@tamanio", Tamanio.ToString());
+            HT.Add("@tienePelo", null);
+            HT.Add("@tienePlumas", null);
+            HT.Add("@idioma", null);
+            HT.Add("@clase", 1);
+            return HT;
         }
     }
 }

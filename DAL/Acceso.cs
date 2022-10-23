@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,30 +11,24 @@ namespace DAL
 {
     public class Acceso
     {
+        string ConnStr = @"Data Source=.\SQLEXPRESS;Initial Catalog=TPLUG;Integrated Security=True";
         private SqlConnection oCnn = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=TPLUG;Integrated Security=True");
+        private SqlTransaction Tranx;
+        private SqlCommand Cmd;
 
-        public DataTable Leer(string consulta)
-        {
-            DataTable tabla = new DataTable();
-            try {
-                SqlDataAdapter Da = new SqlDataAdapter(consulta, oCnn);
-                Da.Fill(tabla);
-            }
-            catch (SqlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
-            finally {
-                oCnn.Close();
-            }
-            return tabla;
-        }
-
-        public bool LeerScalar(string consulta)
+        public bool LeerScalar(string Consulta, Hashtable Parametros)
         {
             oCnn.Open();
-            SqlCommand cmd = new SqlCommand(consulta, oCnn);
-            cmd.CommandType = CommandType.Text;
+            Cmd = new SqlCommand(Consulta, oCnn);
+            Cmd.CommandType = CommandType.StoredProcedure;
             try {
-                int Respuesta = Convert.ToInt32(cmd.ExecuteScalar());
+                if (Parametros != null) {
+                    foreach (string dato in Parametros.Keys) {
+                        Cmd.Parameters.AddWithValue(dato, Parametros[dato]);
+                    }
+                }
+
+                int Respuesta = Convert.ToInt32(Cmd.ExecuteScalar());
                 oCnn.Close();
                 return Respuesta > 0;
             }
@@ -41,42 +36,67 @@ namespace DAL
             catch (Exception ex) { throw ex; }
         }
 
-        public DataSet Leer2(string Consulta_SQL)
+        public DataSet Leer2(string Consulta, Hashtable Parametros)
         {
             DataSet Ds = new DataSet();
-            try {
-                SqlDataAdapter Da = new SqlDataAdapter(Consulta_SQL, oCnn);
-                Da.Fill(Ds);
+            SqlDataAdapter Da;
+
+            Cmd = new SqlCommand(Consulta, oCnn);
+            Cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                Da = new SqlDataAdapter(Cmd);
+                if (Parametros != null)
+                {
+                    foreach (string dato in Parametros.Keys)
+                    {
+                        var test = Parametros[dato];
+
+                        Cmd.Parameters.AddWithValue(dato, test);
+                    }
+                }
             }
-            catch (SqlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
-            finally { 
+            catch (SqlException ex) { throw ex; return null; }
+            catch (Exception ex) { throw ex; return null; }
+            finally
+            {
                 oCnn.Close();
             }
+            Da.Fill(Ds);
             return Ds;
         }
 
-        public bool Escribir(string Consulta_SQL)
+        public bool Escribir(string Consulta, Hashtable Parametros)
         {
 
-            oCnn.Open();
-            SqlTransaction myTrans;
-            SqlCommand Cmd;
-            myTrans = oCnn.BeginTransaction();
-
-            try {
-
-                Cmd = new SqlCommand(Consulta_SQL, oCnn);
-
-                Cmd.Transaction = myTrans;
-
-                Cmd.ExecuteNonQuery();
-
-                myTrans.Commit();
-                return true;
+            if (oCnn.State == ConnectionState.Closed) {
+                oCnn.ConnectionString = ConnStr;
+                oCnn.Open();
             }
-            catch (SqlException ex) {
-                myTrans.Rollback();
+            try {
+                Tranx = oCnn.BeginTransaction();
+                Cmd = new SqlCommand(Consulta, oCnn, Tranx);
+                Cmd.CommandType = CommandType.StoredProcedure;
+
+                if (Parametros != null) {
+                    foreach (string dato in Parametros.Keys) {
+                        Cmd.Parameters.AddWithValue(dato, Parametros[dato]);
+                    }
+                }
+
+                int respuesta = Cmd.ExecuteNonQuery();
+                Tranx.Commit();
+                return true;
+
+            }
+            catch (SqlException ex)
+            {
+                Tranx.Rollback();
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Tranx.Rollback();
                 return false;
             }
 
