@@ -3,6 +3,7 @@ using BE;
 using BE.Personas;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Mapper
     public class DuenioMPP : IGestor<DuenioBE>
     {
         private Acceso AccDatos;
+        private Hashtable HT;
+
         public bool Baja(DuenioBE Objeto)
         {
             throw new NotImplementedException();
@@ -21,11 +24,11 @@ namespace Mapper
 
         public bool Guardar(DuenioBE Objeto)
         {
-            string Consulta_SQL = string.Empty;
-
-            Consulta_SQL = "Insert into Duenio (nombre, mascotaId) values('" + Objeto.Nombre + "', '" + Objeto.Mascota.Codigo + "') ";
             AccDatos = new Acceso();
-            return AccDatos.Escribir(Consulta_SQL);
+            HT = new Hashtable();
+            HT.Add("@nombre", Objeto.Nombre);
+            HT.Add("@mascotaId", Objeto.Mascota.Codigo);
+            return AccDatos.Escribir("CrearDuenio",HT);
         }
 
         public DuenioBE ListarObjeto(DuenioBE Objeto)
@@ -35,11 +38,9 @@ namespace Mapper
 
         public List<DuenioBE> ListarTodo()
         {
-            string Consulta_SQL = string.Empty;
-            Consulta_SQL = "select * from Duenio";
             AccDatos = new Acceso();
             List<DuenioBE> lista = new List<DuenioBE>();
-            DataSet Ds = AccDatos.Leer2(Consulta_SQL);
+            DataSet Ds = AccDatos.Leer2("ListarDuenios", null);
             MascotaMPP MascotaMpp = new MascotaMPP();
 
             if (Ds.Tables[0].Rows.Count > 0)

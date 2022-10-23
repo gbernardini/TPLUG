@@ -3,6 +3,7 @@ using BE;
 using BE.Mascotas;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Mapper
     public class MascotaMPP : IGestor<MascotaBE>
     {
         private Acceso AccDatos;
+        private Hashtable HT;
 
         public bool Baja(MascotaBE Objeto)
         {
@@ -22,26 +24,27 @@ namespace Mapper
 
         public bool Guardar(MascotaBE MascotaBe)
         {
-            string Consulta_SQL = string.Empty;
-            if (MascotaBe.Codigo != 0)
-            {
-                Consulta_SQL = "Update Mascota SET felicidad = '" + MascotaBe.Felicidad + "', energia = '" + MascotaBe.Energia + "' WHERE mascotaId = '" + MascotaBe.Codigo + "'";
+            string StoreProcedure = "ModificarMascota";
+            HT = new Hashtable();
+            if (MascotaBe.Codigo != 0) {
+                HT.Add("@codigo", MascotaBe.Codigo);
+                HT.Add("@felicidad", MascotaBe.Felicidad);
+                HT.Add("@energia", MascotaBe.Energia);
+            } else {
+                StoreProcedure = "CrearMascota";
+                HT = MascotaBe.ObtenerHTAlta();
             }
 
-            else
-            {
-                Consulta_SQL = MascotaBe.ToQuery();
-            }
             AccDatos = new Acceso();
-            return AccDatos.Escribir(Consulta_SQL);
+            return AccDatos.Escribir(StoreProcedure, HT);
         }
 
         public MascotaBE ListarObjeto(MascotaBE Objeto)
         {
-            string Consulta_SQL = string.Empty;
-            string Consulta = "SELECT * FROM Mascota M WHERE M.nombre = '" + Objeto.Nombre + "'";
-            AccDatos = new Acceso(); 
-            DataSet Ds = AccDatos.Leer2(Consulta);
+            AccDatos = new Acceso();
+            HT = new Hashtable();
+            HT.Add("@nombre",Objeto.Nombre);
+            DataSet Ds = AccDatos.Leer2("ListarMascotaXNombre", HT);
 
             DataRow Row = Ds.Tables[0].Rows[0];
             Int32 Clase = Convert.ToInt32(Row[9]);
@@ -67,10 +70,10 @@ namespace Mapper
         }
         public MascotaBE ListarObjetoXCodigo(int Codigo)
         {
-            string Consulta_SQL = string.Empty;
-            string Consulta = "SELECT * FROM Mascota M WHERE M.mascotaId = '" + Codigo + "'";
             AccDatos = new Acceso();
-            DataSet Ds = AccDatos.Leer2(Consulta);
+            HT = new Hashtable();
+            HT.Add("@codigo", Codigo);
+            DataSet Ds = AccDatos.Leer2("ListarMascotaXId", HT);
 
             DataRow Row = Ds.Tables[0].Rows[0];
             Int32 Clase = Convert.ToInt32(Row[9]);
@@ -83,11 +86,9 @@ namespace Mapper
         }
         public List<MascotaBE> ListarTodo()
         {
-            string Consulta_SQL = string.Empty;
-            Consulta_SQL = "select * from Mascota";
             AccDatos = new Acceso();
             List<MascotaBE> lista = new List<MascotaBE>();
-            DataSet Ds = AccDatos.Leer2(Consulta_SQL);
+            DataSet Ds = AccDatos.Leer2("ListarMascotas",null);
 
             if (Ds.Tables[0].Rows.Count > 0)
             {
