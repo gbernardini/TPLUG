@@ -64,6 +64,14 @@
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -73,6 +81,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -352,6 +361,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Controls.Add(this.label20);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.label14);
@@ -437,6 +447,81 @@
             this.dataGridView2.TabIndex = 1;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.label24);
+            this.groupBox4.Controls.Add(this.label25);
+            this.groupBox4.Controls.Add(this.label26);
+            this.groupBox4.Controls.Add(this.label27);
+            this.groupBox4.Location = new System.Drawing.Point(889, 17);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(205, 145);
+            this.groupBox4.TabIndex = 39;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Estado Mascota";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(30, 36);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(67, 20);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "Nombre:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(105, 106);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(0, 20);
+            this.label22.TabIndex = 8;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(30, 79);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(0, 20);
+            this.label23.TabIndex = 2;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(100, 68);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(0, 20);
+            this.label24.TabIndex = 7;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(30, 68);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(62, 20);
+            this.label25.TabIndex = 3;
+            this.label25.Text = "Energia:";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(30, 106);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(72, 20);
+            this.label26.TabIndex = 4;
+            this.label26.Text = "Felicidad:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(103, 36);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(0, 20);
+            this.label27.TabIndex = 5;
+            // 
             // GestionarMascotas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -458,6 +543,8 @@
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -500,5 +587,13 @@
         private Label label19;
         private Label label14;
         private Label label11;
+        private GroupBox groupBox4;
+        private Label label21;
+        private Label label22;
+        private Label label23;
+        private Label label24;
+        private Label label25;
+        private Label label26;
+        private Label label27;
     }
 }

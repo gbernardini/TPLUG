@@ -52,17 +52,11 @@ namespace TP1
 
         private void CargarEstadoMascota()
         {
-            try
-            {
+            if (DuenioSeleccionado != null) {
                 label5.Text = DuenioSeleccionado.Mascota.Nombre;
                 label7.Text = DuenioSeleccionado.Mascota.Energia.ToString();
                 label8.Text = DuenioSeleccionado.Mascota.Felicidad.ToString();
             }
-            catch (Exception)
-            {
-                return;
-            }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -193,6 +187,8 @@ namespace TP1
                 PaseadorBll.GuardarPaseo(PaseoSeleccionado);
                 RecargarPaseosPendientes();
                 RecargarEstadisticaPaseador();
+                ActualizarMascotaPaseada(PaseoSeleccionado.Mascota);
+                PaseoSeleccionado = null;
             }
             catch (ExcepcionEnergia ex)
             {
@@ -219,8 +215,15 @@ namespace TP1
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             PaseoSeleccionado = (PaseoBE)dataGridView3.CurrentRow.DataBoundItem;
+            ActualizarMascotaPaseada(PaseoSeleccionado.Mascota);
         }
 
+        private void ActualizarMascotaPaseada(MascotaBE Mascota)
+        {
+            label27.Text = Mascota.Nombre;
+            label24.Text = Mascota.Energia.ToString();
+            label22.Text = Mascota.Felicidad.ToString();
+        }
         
     }
 }
