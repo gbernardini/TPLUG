@@ -3,6 +3,7 @@ using BE;
 using BE.Personas;
 using DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Mapper
     public class PaseadorMPP : IGestor<PaseadorBE>
     {
         private Acceso AccDatos;
+        private Hashtable HT;
 
         public bool Baja(PaseadorBE Objeto)
         {
@@ -22,11 +24,11 @@ namespace Mapper
 
         public bool Guardar(PaseadorBE Objeto)
         {
-            string Consulta_SQL = string.Empty;
-
-            Consulta_SQL = "Insert into Paseador (nombre, cantMaxMascotas) values('" + Objeto.Nombre + "', '" + Objeto.CantMaxMascotas + "') ";
             AccDatos = new Acceso();
-            return AccDatos.Escribir(Consulta_SQL);
+            HT = new Hashtable();
+            HT.Add("@nombre", Objeto.Nombre);
+            HT.Add("@cantMaxMascotas", Objeto.CantMaxMascotas);
+            return AccDatos.Escribir("CrearPaseador", HT);
         }
         public PaseadorBE ListarObjeto(PaseadorBE Objeto)
         {
@@ -34,10 +36,10 @@ namespace Mapper
         }
         public PaseadorBE ListarObjetoXCodigo(int Codigo)
         {
-            string Consulta_SQL = string.Empty;
-            string Consulta = "SELECT * FROM Paseador P WHERE P.paseadorId = '" + Codigo + "'";
             AccDatos = new Acceso();
-            DataSet Ds = AccDatos.Leer2(Consulta);
+            HT = new Hashtable();
+            HT.Add("@codigo", Codigo);
+            DataSet Ds = AccDatos.Leer2("ListarPaseadorXCodigo", HT);
 
             DataRow Row = Ds.Tables[0].Rows[0];
             PaseadorBE Paseador = new PaseadorBE(Row[1].ToString(), Convert.ToInt32(Row[2]));
@@ -48,11 +50,9 @@ namespace Mapper
 
         public List<PaseadorBE> ListarTodo()
         {
-            string Consulta_SQL = string.Empty;
-            Consulta_SQL = "select * from Paseador";
             AccDatos = new Acceso();
             List<PaseadorBE> lista = new List<PaseadorBE>();
-            DataSet Ds = AccDatos.Leer2(Consulta_SQL);
+            DataSet Ds = AccDatos.Leer2("ListarPaseadores",null);
 
             if (Ds.Tables[0].Rows.Count > 0)
             {
@@ -70,11 +70,12 @@ namespace Mapper
 
         public List<PaseoBE> ListarPaseosXEstadoXPaseador(int CodPaseador, int Pendiente)
         {
-            string Consulta_SQL = string.Empty;
-            Consulta_SQL = "select * from Paseo P WHERE P.paseadorId = '" + CodPaseador + "' AND P.pendiente = '" + Pendiente + "'";
             AccDatos = new Acceso();
             List<PaseoBE> lista = new List<PaseoBE>();
-            DataSet Ds = AccDatos.Leer2(Consulta_SQL);
+            HT = new Hashtable();
+            HT.Add("@codigo", CodPaseador);
+            HT.Add("@estado", Pendiente);
+            DataSet Ds = AccDatos.Leer2("ListarPaseoXEstadoXPaseador", HT);
 
             if (Ds.Tables[0].Rows.Count > 0)
             {
@@ -97,28 +98,36 @@ namespace Mapper
 
         public bool GuardarPaseo(PaseoBE Paseo)
         {
-            string Consulta_SQL = string.Empty;
+            string StoreProcedure = "ModificarPaseo";
+            HT = new Hashtable();
 
             if (Paseo.Codigo > 0)
             {
-                Consulta_SQL = "Update Paseo SET pendiente = 0";
+                HT.Add("@codigo", Paseo.Codigo);
             }
             else
             {
-                Consulta_SQL = "Insert into Paseo (paseadorId, mascotaId, distancia, pendiente) values('" + Paseo.Paseador.Codigo + "', '" + Paseo.Mascota.Codigo + "', '" + Paseo.Distancia + "', '" + Paseo.Pendiente + "') ";
+                StoreProcedure = "CrearPaseo";
+                HT.Add("@codigoPaseador", Paseo.Paseador.Codigo);
+                HT.Add("@codigoMascota", Paseo.Mascota.Codigo);
+                HT.Add("@distancia", Paseo.Distancia);
             }
             AccDatos = new Acceso();
-            return AccDatos.Escribir(Consulta_SQL);
+            return AccDatos.Escribir(StoreProcedure,HT);
         }
 
         public int ObtenerDistanciaRecorrida(int CodPaseador)
         {
-            string Consulta_SQL = string.Empty;
-            Consulta_SQL = "select SUM(P.distancia) from Paseo P WHERE P.paseadorId = '" + CodPaseador + "' AND P.pendiente = 0";
             AccDatos = new Acceso();
-            DataSet Ds = AccDatos.Leer2(Consulta_SQL);
-
-            return Ds.Tables[0].Rows.Count > 0 ? Convert.ToInt32(Ds.Tables[0].Rows[0][0]) : 0;
+            HT = new Hashtable();
+            HT.Add("@codigo", CodPaseador);
+            DataSet Ds = AccDatos.Leer2("ObtenerDistanciaRecorridaPaseador", HT);
+            int Distancia = 0;
+            try
+            {
+                Distancia = Convert.ToInt32(Ds.Tables[0].Rows[0][0]);
+            } catch (Exception ex) { return 0; }
+            return Distancia;
         }
     }
 }

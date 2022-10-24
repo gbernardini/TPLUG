@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,9 +29,9 @@ namespace BE
             }
         }
 
-        public virtual string ToQuery()
+        public virtual Hashtable ObtenerHTAlta()
         {
-            return "";
+            return null;
         }
         public enum TamanioMascota
         {
