@@ -54,5 +54,12 @@ namespace TP1
         {
             menuStrip2.Visible = true;
         }
+
+        private void gestionarPaseadorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GestionarPaseador GestionarPaseadorFrom = new GestionarPaseador();
+            GestionarPaseadorFrom.MdiParent = this;
+            GestionarPaseadorFrom.Show();
+        }
     }
 }

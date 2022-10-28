@@ -51,6 +51,7 @@
     <Compile Include="Mascotas\PerroBE.cs" />
     <Compile Include="PaseoBE.cs" />
     <Compile Include="Personas\DuenioBE.cs" />
+    <Compile Include="Personas\PaseadorXML.cs" />
     <Compile Include="Personas\PaseadorBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioBE.cs" />

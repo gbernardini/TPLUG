@@ -35,8 +35,9 @@
             this.crearPaseadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarMascotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mascotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.gestionarPaseadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             this.crearPaseadorToolStripMenuItem,
             this.gestionarMascotasToolStripMenuItem,
             this.mascotasToolStripMenuItem,
+            this.gestionarPaseadorToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.aBMDueToolStripMenuItem.Name = "aBMDueToolStripMenuItem";
             this.aBMDueToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
@@ -101,6 +103,13 @@
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
+            // gestionarPaseadorToolStripMenuItem
+            // 
+            this.gestionarPaseadorToolStripMenuItem.Name = "gestionarPaseadorToolStripMenuItem";
+            this.gestionarPaseadorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gestionarPaseadorToolStripMenuItem.Text = "Gestionar Paseador";
+            this.gestionarPaseadorToolStripMenuItem.Click += new System.EventHandler(this.gestionarPaseadorToolStripMenuItem_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -127,5 +136,6 @@
         private ToolStripMenuItem gestionarMascotasToolStripMenuItem;
         private ToolStripMenuItem mascotasToolStripMenuItem;
         private ToolStripMenuItem salirToolStripMenuItem;
+        private ToolStripMenuItem gestionarPaseadorToolStripMenuItem;
     }
 }
