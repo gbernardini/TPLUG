@@ -68,6 +68,14 @@ namespace Mapper
             return lista;
         }
 
+        public bool ExistePaseador(string nombre)
+        {
+            AccDatos = new Acceso();
+            HT = new Hashtable();
+            HT.Add("@nombre", nombre);
+            return AccDatos.LeerScalar("ExistePaseador", HT);
+        }
+
         public List<PaseoBE> ListarPaseosXEstadoXPaseador(int CodPaseador, int Pendiente)
         {
             AccDatos = new Acceso();

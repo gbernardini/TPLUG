@@ -49,6 +49,11 @@ namespace TP1.Modelo
         {
             return MPP.ListarTodo();
         }
+
+        public bool ExisteDuenio(string nombre)
+        {
+            return MPP.ExisteDuenio(nombre);
+        }
         #endregion
     }
 }

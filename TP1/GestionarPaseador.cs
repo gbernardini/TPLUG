@@ -123,5 +123,32 @@ namespace Presentacion_UI
             BorrarDatos();
             ActualizarPaseadores();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            var consulta =
+                from paseador in XElement.Load("paseadores.xml").Elements("paseador")
+                where paseador.Element("cantMascotas").Value == numericUpDown2.Value.ToString().Trim()
+                select new PaseadorXML
+
+                {
+                     IdPaseador = Convert.ToInt32(Convert.ToString(paseador.Attribute("id").Value).Trim()),
+                    Nombre = Convert.ToString(paseador.Element("nombre").Value).Trim(),
+                    Apellido = Convert.ToString(paseador.Element("apellido").Value).Trim(),
+                    DNI = Convert.ToInt32(paseador.Element("dni").Value.Trim()),
+                    CantMascotasMax = Convert.ToInt32(paseador.Element("cantMascotas").Value.Trim())
+                };
+
+            List<PaseadorXML> Paseadores = consulta.ToList<PaseadorXML>();
+
+            this.dataGridView1.DataSource = null;
+            this.dataGridView1.DataSource = Paseadores;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ActualizarPaseadores();
+        }
     }
 }

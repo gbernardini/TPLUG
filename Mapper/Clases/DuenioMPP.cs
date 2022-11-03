@@ -56,5 +56,13 @@ namespace Mapper
            
             return lista;
         }
+
+        public bool ExisteDuenio(string nombre)
+        {
+            AccDatos = new Acceso();
+            HT = new Hashtable();
+            HT.Add("@nombre", nombre);
+            return AccDatos.LeerScalar("ExisteDuenio", HT);
+        }
     }
 }

@@ -80,5 +80,10 @@ namespace TP1.Modelo.Mascotas
         {
             return MPP.ListarTodo();
         }
+
+        public bool ExisteMascota(string nombre)
+        {
+            return MPP.ExisteMascota(nombre);
+        }
     }
 }

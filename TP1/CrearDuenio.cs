@@ -119,10 +119,23 @@ namespace TP1
                 }
             }
             MascotaBLL MascotaBll = MascotaBLL.ObtenerMascota(Mascota);
+            if (MascotaBll.ExisteMascota(Mascota.Nombre))
+            {
+                MessageBox.Show("La mascota ya existe");
+                return;
+            }
+
+            DuenioBLL DuenioBll = new DuenioBLL();
+            if (DuenioBll.ExisteDuenio(textBox1.Text))
+            {
+                MessageBox.Show("El duenio ya existe");
+                return;
+            }
+
             if (!MascotaBll.GuardarMascota(Mascota)) { return; }
             Mascota.Codigo = MascotaBll.ObtenerCodigoMascota(Mascota);
             Dueno = new DuenioBE(textBox1.Text, Mascota);
-            DuenioBLL DuenioBll = new DuenioBLL();
+            
             DuenioBll.Alta(Dueno, Mascota);
             Duenios.Add(Dueno);
 

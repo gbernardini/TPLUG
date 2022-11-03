@@ -53,6 +53,12 @@ namespace TP1.Modelo
         {
             return MPP.Guardar(Paseador);
         }
+
+        public bool ExistePaseador(string nombre)
+        {
+            return MPP.ExistePaseador(nombre);
+        }
+
         public List<PaseadorBE> ListarPaseadores()
         {
             return MPP.ListarTodo();

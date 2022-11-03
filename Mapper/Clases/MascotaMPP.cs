@@ -105,5 +105,13 @@ namespace Mapper
 
             return lista;
         }
+
+        public bool ExisteMascota(string nombre)
+        {
+            AccDatos = new Acceso();
+            HT = new Hashtable();
+            HT.Add("@nombre", nombre);
+            return AccDatos.LeerScalar("ExisteMascota", HT);
+        }
     }
 }

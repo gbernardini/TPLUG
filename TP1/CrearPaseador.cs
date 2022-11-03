@@ -46,6 +46,11 @@ namespace TP1
             }
             PaseadorBE Paseador = new PaseadorBE(ucmail21.Texto(), CantMaxMascotas);
             PaseadorBLL PaseadorBll = new PaseadorBLL();
+            if (PaseadorBll.ExistePaseador(Paseador.Nombre))
+            {
+                MessageBox.Show("El paseador ya existe");
+                return;
+            }
             PaseadorBll.Alta(Paseador);
             Paseadores.Add(Paseador);
             ucmail21.Limpiar();
