@@ -24,7 +24,7 @@ namespace TP1
         private void button1_Click(object sender, EventArgs e)
         {
             int CantMaxMascotas;
-            if (textBox1.Text == "")
+            if (!ucmail21.esValido())
             {
                 MessageBox.Show("No se puede crear un paseador sin nombre");
                 return;
@@ -44,13 +44,12 @@ namespace TP1
                 MessageBox.Show("Ingrese una cantidad valida");
                 return;
             }
-            PaseadorBE Paseador = new PaseadorBE(textBox1.Text, CantMaxMascotas);
+            PaseadorBE Paseador = new PaseadorBE(ucmail21.Texto(), CantMaxMascotas);
             PaseadorBLL PaseadorBll = new PaseadorBLL();
             PaseadorBll.Alta(Paseador);
             Paseadores.Add(Paseador);
-            textBox1.Text = "";
-            numericUpDown1.Value = 1;
-                
+            ucmail21.Limpiar();
+            numericUpDown1.Value = 1;      
         }
     }
 }

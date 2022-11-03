@@ -28,49 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.ucmail23 = new Presentacion_UI.Ucmail2();
+            this.ucmail22 = new Presentacion_UI.Ucmail2();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Usuario:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 87);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Password:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(109, 51);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
-            this.textBox1.TabIndex = 2;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(109, 89);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(125, 27);
-            this.textBox2.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(53, 136);
+            this.button1.Location = new System.Drawing.Point(59, 162);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(145, 29);
             this.button1.TabIndex = 4;
@@ -78,30 +43,41 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // ucmail23
+            // 
+            this.ucmail23.LabelText = "Pass:";
+            this.ucmail23.Location = new System.Drawing.Point(12, 82);
+            this.ucmail23.Name = "ucmail23";
+            this.ucmail23.RegexString = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{4,8})$";
+            this.ucmail23.Size = new System.Drawing.Size(258, 62);
+            this.ucmail23.TabIndex = 6;
+            // 
+            // ucmail22
+            // 
+            this.ucmail22.LabelText = null;
+            this.ucmail22.Location = new System.Drawing.Point(12, 27);
+            this.ucmail22.Name = "ucmail22";
+            this.ucmail22.RegexString = "^\\S+@\\S+\\.\\S+$";
+            this.ucmail22.Size = new System.Drawing.Size(258, 62);
+            this.ucmail22.TabIndex = 5;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 203);
+            this.Controls.Add(this.ucmail23);
+            this.Controls.Add(this.ucmail22);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Name = "Login";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Label label1;
-        private Label label2;
-        private TextBox textBox1;
-        private TextBox textBox2;
         private Button button1;
+        private Ucmail2 ucmail22;
+        private Ucmail2 ucmail23;
     }
 }

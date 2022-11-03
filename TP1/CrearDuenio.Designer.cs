@@ -182,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 354);
+            this.ClientSize = new System.Drawing.Size(940, 359);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
@@ -211,5 +211,6 @@
         private Button button1;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
+        private Presentacion_UI.Ucmail2 ucmail21;
     }
 }

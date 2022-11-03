@@ -23,23 +23,27 @@ namespace Presentacion_UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string Usuario = textBox1.Text;
-            string Password = textBox2.Text;
+            string Usuario = ucmail22.Texto();
+            string Password = ucmail23.Texto();
             UsuarioBE UsuarioBe = new UsuarioBE(Usuario, Password);
             UsuarioBLL loginBLL = new UsuarioBLL();
+
+            if (!ucmail22.esValido())
+            {
+                MessageBox.Show("El mail no cumple con el formato");
+                return;
+            }
+            if (!ucmail23.esValido())
+            {
+                MessageBox.Show("La contrasenia no cumple con el formato");
+                return;
+            }
             if (loginBLL.IniciarSesion(UsuarioBe)) {
                 EvLogin();
                 this.Close();
-  
-
             } else {
                 MessageBox.Show("Credenciales no validas");
             }
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

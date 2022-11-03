@@ -28,22 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
+            this.ucmail21 = new Presentacion_UI.Ucmail2();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(39, 74);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre:";
             // 
             // label2
             // 
@@ -53,13 +43,6 @@
             this.label2.Size = new System.Drawing.Size(216, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Cantidad Maxima de mascotas:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(121, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
-            this.textBox1.TabIndex = 2;
             // 
             // numericUpDown1
             // 
@@ -83,16 +66,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // ucmail21
+            // 
+            this.ucmail21.LabelText = null;
+            this.ucmail21.Location = new System.Drawing.Point(2, 29);
+            this.ucmail21.Name = "ucmail21";
+            this.ucmail21.RegexString = "^[A-Za-z]+$";
+            this.ucmail21.label2.Text = "Nombre:";
+            this.ucmail21.Size = new System.Drawing.Size(348, 80);
+            this.ucmail21.TabIndex = 5;
+            // 
             // CrearPaseador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(341, 234);
+            this.Controls.Add(this.ucmail21);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Name = "CrearPaseador";
             this.Text = "CrearPaseador";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -102,11 +94,9 @@
         }
 
         #endregion
-
-        private Label label1;
         private Label label2;
-        private TextBox textBox1;
         private NumericUpDown numericUpDown1;
         private Button button1;
+        private Presentacion_UI.Ucmail2 ucmail21;
     }
 }
