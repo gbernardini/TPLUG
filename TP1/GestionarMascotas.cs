@@ -149,6 +149,11 @@ namespace TP1
             } catch (ExcepcionLimiteMascotas ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Ingrese una distancia valida");
+                return;
             }
 
         }
