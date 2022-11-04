@@ -79,5 +79,32 @@ namespace TP1.Modelo
             return MPP.ObtenerDistanciaRecorrida(CodPaseador);
         }
         #endregion
+
+        #region XML
+        public List<PaseadorXML> ListarPaseadoresXML()
+        {
+            return MPP.ListarPaseadoresXML();
+        }
+
+        public void BorrarPaseadorXML(string id)
+        {
+            MPP.BorrarPaseadorXML(id);
+        }
+
+        public List<PaseadorXML> ListarPaseadoresPorMascotasXML(string cantMascotas)
+        {
+            return MPP.ListarPaseadoresPorMascotasXML(cantMascotas);
+        }
+
+        public void AltaPaseadorXML(PaseadorXML PaseadorXml)
+        {
+            MPP.AltaPaseadorXML(PaseadorXml);
+        }
+
+        public void EditarPaseadorXML(PaseadorXML PaseadorXml)
+        {
+            MPP.EditarPaseadorXML(PaseadorXml);
+        }
+        #endregion
     }
 }

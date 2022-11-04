@@ -1,6 +1,7 @@
 ﻿using BE.Personas;
 using System.Data;
 using System.Xml.Linq;
+using TP1.Modelo;
 
 namespace Presentacion_UI
 {
@@ -14,33 +15,36 @@ namespace Presentacion_UI
 
         public List<PaseadorXML> LeerXML()
         {
-            var consulta =
-                from paseador in XElement.Load("paseadores.xml").Elements("paseador")
-                select new PaseadorXML
-                {
-                    IdPaseador = Convert.ToInt32(Convert.ToString(paseador.Attribute("id").Value).Trim()),
-                    Nombre = Convert.ToString(paseador.Element("nombre").Value).Trim(),
-                    Apellido = Convert.ToString(paseador.Element("apellido").Value).Trim(),
-                    DNI = Convert.ToInt32(paseador.Element("dni").Value.Trim()),
-                    CantMascotasMax = Convert.ToInt32(paseador.Element("cantMascotas").Value.Trim())
-                };
-
-            List<PaseadorXML> Paseadores = consulta.ToList<PaseadorXML>();
-            return Paseadores;
+            PaseadorBLL PaseadorBll = new PaseadorBLL();
+            return PaseadorBll.ListarPaseadoresXML();
         }
 
         private void AgregarXML()
         {
-            XDocument xmlDoc = XDocument.Load("paseadores.xml");
+            PaseadorBLL PaseadorBll = new PaseadorBLL();
+            PaseadorXML PaseadorXml = new PaseadorXML();
+            int cantMascotas = 1;
+            int dni = 0;
+            try { 
+                cantMascotas = Convert.ToInt32(numericUpDown1.Value.ToString().Trim());
+                dni = Convert.ToInt32(textBox3.Text.Trim());
+            } catch {
+                MessageBox.Show("Ingrese un DNI valido");
+                return;
+            }
 
-            xmlDoc.Element("paseadores").Add(new XElement("paseador",
-                                        new XAttribute("id", textBox4.Text.Trim()),
-                                        new XElement("nombre", textBox1.Text.Trim()),
-                                        new XElement("apellido", textBox2.Text.Trim()),
-                                        new XElement("dni", textBox3.Text.Trim()),
-                                        new XElement("cantMascotas", numericUpDown1.Value.ToString().Trim())));
+            if (textBox1.Text == "" | textBox2.Text == "") {
+                MessageBox.Show("Complete los campos vacios");
+                return;
+            }
 
-            xmlDoc.Save("paseadores.xml");
+            PaseadorXml.Nombre = textBox1.Text.Trim();
+            PaseadorXml.Apellido = textBox2.Text.Trim();
+            PaseadorXml.DNI = dni;
+            PaseadorXml.CantMascotasMax = cantMascotas;
+
+            PaseadorBll.AltaPaseadorXML(PaseadorXml);
+           
             ActualizarPaseadores();
             BorrarDatos();
         }
@@ -89,61 +93,53 @@ namespace Presentacion_UI
 
         private void BorrarPaseador(string id)
         {
-            XDocument doc = XDocument.Load("paseadores.xml");
 
-            var consulta = from paseador in doc.Descendants("paseador")
-                           where paseador.Attribute("id").Value == id
-                           select paseador;
-            consulta.Remove();
-
-            doc.Save("paseadores.xml");
-
+            PaseadorBLL PaseadorBll = new PaseadorBLL();
+            PaseadorBll.BorrarPaseadorXML(id);
             BorrarDatos();
             ActualizarPaseadores();
         }
 
         private void ModificarPaseador(string id)
         {
-            XDocument doc = XDocument.Load("paseadores.xml");
-
-            var consulta = from paseador in doc.Descendants("paseador")
-                           where paseador.Attribute("id").Value == id
-                           select paseador;
-
-            foreach (XElement Nodo in consulta)
-            {
-                Nodo.Attribute("id").Value = textBox4.Text.Trim();
-                Nodo.Element("nombre").Value = textBox1.Text.Trim();
-                Nodo.Element("apellido").Value = textBox2.Text.Trim();
-                Nodo.Element("dni").Value = textBox3.Text.Trim();
-                Nodo.Element("cantMascotas").Value = numericUpDown1.Value.ToString().Trim();
+            PaseadorBLL PaseadorBll = new PaseadorBLL();
+            PaseadorXML PaseadorXml = new PaseadorXML();
+            int cantMascotas = 1;
+            int PasId = 0;
+            int dni;
+            try { 
+                cantMascotas = Convert.ToInt32(numericUpDown1.Value.ToString().Trim());
+                PasId = Convert.ToInt32(textBox4.Text.Trim());
+                dni = Convert.ToInt32(textBox3.Text.Trim());
+            } catch {
+                MessageBox.Show("Ingrese un datos valido");
+                return;
             }
 
-            doc.Save("paseadores.xml");
+            if (textBox1.Text == "" | textBox2.Text == "")
+            {
+                MessageBox.Show("Complete los campos vacios");
+                return;
+            }
+
+            PaseadorXml.IdPaseador = PasId;
+            PaseadorXml.Nombre = textBox1.Text.Trim();
+            PaseadorXml.Apellido = textBox2.Text.Trim();
+            PaseadorXml.DNI = dni;
+            PaseadorXml.CantMascotasMax = cantMascotas;
+
+            PaseadorBll.EditarPaseadorXML(PaseadorXml);
+
             BorrarDatos();
             ActualizarPaseadores();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-            var consulta =
-                from paseador in XElement.Load("paseadores.xml").Elements("paseador")
-                where paseador.Element("cantMascotas").Value == numericUpDown2.Value.ToString().Trim()
-                select new PaseadorXML
-
-                {
-                     IdPaseador = Convert.ToInt32(Convert.ToString(paseador.Attribute("id").Value).Trim()),
-                    Nombre = Convert.ToString(paseador.Element("nombre").Value).Trim(),
-                    Apellido = Convert.ToString(paseador.Element("apellido").Value).Trim(),
-                    DNI = Convert.ToInt32(paseador.Element("dni").Value.Trim()),
-                    CantMascotasMax = Convert.ToInt32(paseador.Element("cantMascotas").Value.Trim())
-                };
-
-            List<PaseadorXML> Paseadores = consulta.ToList<PaseadorXML>();
-
+            PaseadorBLL PaseadorBll = new PaseadorBLL();
+            string cantMascotas = numericUpDown2.Value.ToString().Trim();
             this.dataGridView1.DataSource = null;
-            this.dataGridView1.DataSource = Paseadores;
+            this.dataGridView1.DataSource = PaseadorBll.ListarPaseadoresPorMascotasXML(cantMascotas);
         }
 
         private void button5_Click(object sender, EventArgs e)

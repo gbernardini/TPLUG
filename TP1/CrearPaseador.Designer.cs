@@ -47,6 +47,11 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(261, 115);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(52, 27);
             this.numericUpDown1.TabIndex = 3;
@@ -72,7 +77,6 @@
             this.ucmail21.Location = new System.Drawing.Point(2, 29);
             this.ucmail21.Name = "ucmail21";
             this.ucmail21.RegexString = "^[A-Za-z]+$";
-            this.ucmail21.label2.Text = "Nombre:";
             this.ucmail21.Size = new System.Drawing.Size(348, 80);
             this.ucmail21.TabIndex = 5;
             // 

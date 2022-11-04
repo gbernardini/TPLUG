@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Mapper
 {
@@ -103,7 +104,6 @@ namespace Mapper
 
             return lista;
         }
-
         public bool GuardarPaseo(PaseoBE Paseo)
         {
             string StoreProcedure = "ModificarPaseo";
@@ -137,5 +137,90 @@ namespace Mapper
             } catch (Exception ex) { return 0; }
             return Distancia;
         }
+
+        #region
+        public List<PaseadorXML> ListarPaseadoresXML()
+        {
+            var consulta =
+               from paseador in XElement.Load("paseadores.xml").Elements("paseador")
+               select new PaseadorXML
+               {
+                   IdPaseador = Convert.ToInt32(Convert.ToString(paseador.Attribute("id").Value).Trim()),
+                   Nombre = Convert.ToString(paseador.Element("nombre").Value).Trim(),
+                   Apellido = Convert.ToString(paseador.Element("apellido").Value).Trim(),
+                   DNI = Convert.ToInt32(paseador.Element("dni").Value.Trim()),
+                   CantMascotasMax = Convert.ToInt32(paseador.Element("cantMascotas").Value.Trim())
+               };
+
+            List<PaseadorXML> Paseadores = consulta.ToList<PaseadorXML>();
+            return Paseadores;
+        }
+
+        public List<PaseadorXML> ListarPaseadoresPorMascotasXML(string cantMascotas)
+        {
+            var consulta =
+                from paseador in XElement.Load("paseadores.xml").Elements("paseador")
+                where paseador.Element("cantMascotas").Value == cantMascotas
+                select new PaseadorXML
+
+                {
+                    IdPaseador = Convert.ToInt32(Convert.ToString(paseador.Attribute("id").Value).Trim()),
+                    Nombre = Convert.ToString(paseador.Element("nombre").Value).Trim(),
+                    Apellido = Convert.ToString(paseador.Element("apellido").Value).Trim(),
+                    DNI = Convert.ToInt32(paseador.Element("dni").Value.Trim()),
+                    CantMascotasMax = Convert.ToInt32(paseador.Element("cantMascotas").Value.Trim())
+                };
+
+            List<PaseadorXML> Paseadores = consulta.ToList<PaseadorXML>();
+            return Paseadores;
+        }  
+
+        public void BorrarPaseadorXML(string id)
+        {
+            XDocument doc = XDocument.Load("paseadores.xml");
+
+            var consulta = from paseador in doc.Descendants("paseador")
+                           where paseador.Attribute("id").Value == id
+                           select paseador;
+            consulta.Remove();
+
+            doc.Save("paseadores.xml");
+        }
+
+        public void AltaPaseadorXML(PaseadorXML paseadorXml)
+        {
+            XDocument xmlDoc = XDocument.Load("paseadores.xml");
+
+            xmlDoc.Element("paseadores").Add(new XElement("paseador",
+                                        new XAttribute("id", paseadorXml.IdPaseador.ToString()),
+                                        new XElement("nombre", paseadorXml.Nombre),
+                                        new XElement("apellido", paseadorXml.Apellido),
+                                        new XElement("dni", paseadorXml.DNI.ToString()),
+                                        new XElement("cantMascotas", paseadorXml.CantMascotasMax.ToString())));
+
+            xmlDoc.Save("paseadores.xml");
+
+        }
+
+        public void EditarPaseadorXML(PaseadorXML paseadorXml)
+        {
+            XDocument xmlDoc = XDocument.Load("paseadores.xml");
+
+            var consulta = from paseador in xmlDoc.Descendants("paseador")
+                           where paseador.Attribute("id").Value == paseadorXml.IdPaseador.ToString()
+                           select paseador;
+
+            foreach (XElement Nodo in consulta)
+            {
+                Nodo.Attribute("id").Value = paseadorXml.IdPaseador.ToString();
+                Nodo.Element("nombre").Value = paseadorXml.Nombre;
+                Nodo.Element("apellido").Value = paseadorXml.Apellido;
+                Nodo.Element("dni").Value = paseadorXml.DNI.ToString();
+                Nodo.Element("cantMascotas").Value = paseadorXml.CantMascotasMax.ToString();
+            }
+
+            xmlDoc.Save("paseadores.xml");
+        }
+        #endregion
     }
 }
