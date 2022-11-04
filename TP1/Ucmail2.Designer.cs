@@ -37,15 +37,15 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 20);
+            this.label2.Size = new System.Drawing.Size(41, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Mail:";
             // 
             // TextBox
             // 
-            this.TextBox.Location = new System.Drawing.Point(53, 15);
+            this.TextBox.Location = new System.Drawing.Point(86, 15);
             this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(223, 27);
+            this.TextBox.Size = new System.Drawing.Size(190, 27);
             this.TextBox.TabIndex = 5;
             // 
             // Ucmail2

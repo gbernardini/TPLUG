@@ -45,11 +45,13 @@
             // 
             // ucmail23
             // 
-            this.ucmail23.LabelText = "Pass:";
+            this.ucmail23.LabelText = null;
             this.ucmail23.Location = new System.Drawing.Point(12, 82);
             this.ucmail23.Name = "ucmail23";
             this.ucmail23.RegexString = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{4,8})$";
             this.ucmail23.Size = new System.Drawing.Size(258, 62);
+            this.ucmail23.TextBox.PasswordChar = '*';
+            this.ucmail23.label2.Text = "Pass:";
             this.ucmail23.TabIndex = 6;
             // 
             // ucmail22

@@ -20,11 +20,6 @@ namespace Presentacion_UI
         public string LabelText { get; set; }
         public string RegexString { get; set; }
 
-        public void CargarCon(string Text, string expresion)
-        {
-            LabelText = Text;
-            RegexString = expresion;
-        }
         public bool esValido()
         {
             Regex RegExp = new Regex(RegexString);
