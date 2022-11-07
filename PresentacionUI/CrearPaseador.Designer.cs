@@ -81,6 +81,7 @@ namespace PresentacionUI
             this.ucmail21.RegexString = "^[A-Za-z]+$";
             this.ucmail21.Size = new System.Drawing.Size(348, 80);
             this.ucmail21.TabIndex = 5;
+            this.ucmail21.label2.Text = "Nombre:";
             // 
             // CrearPaseador
             // 
