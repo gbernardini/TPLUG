@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA43FF6F-EEA3-47FB-9B14-3CA80A02A729}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PresentacionUI</RootNamespace>
+    <AssemblyName>PresentacionUI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CrearDuenio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrearDuenio.Designer.cs">
+      <DependentUpon>CrearDuenio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrearPaseador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrearPaseador.Designer.cs">
+      <DependentUpon>CrearPaseador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarMascotas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionarMascotas.Designer.cs">
+      <DependentUpon>GestionarMascotas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarPaseador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionarPaseador.Designer.cs">
+      <DependentUpon>GestionarPaseador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenarMascotas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrdenarMascotas.Designer.cs">
+      <DependentUpon>OrdenarMascotas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ucmail2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ucmail2.Designer.cs">
+      <DependentUpon>Ucmail2.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CrearDuenio.resx">
+      <DependentUpon>CrearDuenio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrearPaseador.resx">
+      <DependentUpon>CrearPaseador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionarMascotas.resx">
+      <DependentUpon>GestionarMascotas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionarPaseador.resx">
+      <DependentUpon>GestionarPaseador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrdenarMascotas.resx">
+      <DependentUpon>OrdenarMascotas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Ucmail2.resx">
+      <DependentUpon>Ucmail2.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BE\BE.csproj">
+      <Project>{79ecaa86-9782-4302-bf1c-fb46ac0a5a48}</Project>
+      <Name>BE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI\BLL.csproj">
+      <Project>{ec0dc3a2-4c90-4841-ab4b-93f6136eab7b}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
